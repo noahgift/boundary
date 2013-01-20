@@ -36,3 +36,7 @@ library(ggplot2)
 # probability of male
 ggplot(dt, aes(dt$Length,dt$WWt,dt$regvals,colour=dt$regvals)) + geom_point(size=1.5)
 ```
+
+The visualization for the abalone data will look like this
+
+![Abalone](https://raw.github.com/noahgift/boundary/master/images/abalone.png)
