@@ -4,6 +4,9 @@ boundary
 norm-noah boundary
 -----------------------
 
+Example: 1
+-----------------
+
 Data obtained data from 
   http://archive.ics.uci.edu/ml/datasets/Abalone
   
@@ -21,7 +24,7 @@ dt <- ab[,c(2,5,9,10)]
 # used nearest-neighbor method to estimate probability of male at each
 # combination of length and whole weight
 source("/home/nm/R/kNN.R")
-kout <- knn(dt[,c(2,5)],dt[,10],50,regtype="cls")
+kout <- knn(ab[,c(2,5)],ab[,10],50,regtype="cls")
 
 # added the estimated probabilities to dt
 dt$regvals <- kout$regvals
