@@ -2,15 +2,16 @@ boundary
 ========
 
 norm-noah boundary
+-----------------------
 
-# obtained data from http://archive.ics.uci.edu/ml/datasets/Abalone
-
-# I added a header to start of .data file (no #)
+Data obtained data from 
+  http://archive.ics.uci.edu/ml/datasets/Abalone
+  
+```{r }
+## I added a header to start of .data file (no #)
 # Sex,Length,Diam,Ht,WWt,SWt,VWt,Shell,Rings
-
 ab <- read.csv("abalone.data",header=T)
 library(ggplot2)
-
 # add numeric code for male
 ab$Male <- as.integer(ab$Sex == "M")
 
@@ -31,3 +32,4 @@ library(ggplot2)
 # ran scatter plot of weight vs. length, color-coded by estimated
 # probability of male
 ggplot(dt, aes(dt$Length,dt$WWt,dt$regvals,colour=dt$regvals)) + geom_point(size=1.5)
+```
