@@ -14,7 +14,6 @@ Data obtained data from
 ## I added a header to start of .data file (no #)
 # Sex,Length,Diam,Ht,WWt,SWt,VWt,Shell,Rings
 ab <- read.csv("abalone.data",header=T)
-library(ggplot2)
 # add numeric code for male
 ab$Male <- as.integer(ab$Sex == "M")
 
@@ -23,7 +22,7 @@ dt <- ab[,c(2,5,9,10)]
 
 # used nearest-neighbor method to estimate probability of male at each
 # combination of length and whole weight
-source("/home/nm/R/kNN.R")
+source("kNN.R") #This assumes a relative path to the checkout
 kout <- knn(ab[,c(2,5)],ab[,10],50,regtype="cls")
 
 # added the estimated probabilities to dt
