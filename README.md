@@ -44,6 +44,7 @@ The boundary code though, can visualize the boundary when the probability of mal
 To generate this, you would do the following:
 
 ```{r }
+source("Boundary.R")
 boundary(ab$Male,ab[,c(2,5)],k=3)
 ```
 The new visualization for the abalone data probability boundary will look like this:
