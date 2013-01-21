@@ -14,7 +14,6 @@ Data obtained data from
 ## I added a header to start of .data file (no #)
 # Sex,Length,Diam,Ht,WWt,SWt,VWt,Shell,Rings
 ab <- read.csv("abalone.data",header=T)
-library(ggplot2)
 # add numeric code for male
 ab$Male <- as.integer(ab$Sex == "M")
 
