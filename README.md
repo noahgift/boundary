@@ -50,3 +50,16 @@ boundary(ab$Male,ab[,c(2,5)],k=3)
 The new visualization for the abalone data probability boundary will look like this:
 
 ![Abalone](https://raw.github.com/noahgift/boundary/master/images/boundary.png)
+
+Example 2:  Five Years NBA Team Winning Season Probability
+-------------------------------------------------------------
+```{r }
+library(ggplot2)
+ggplot(teams, aes(teams$to, teams$fta, teams$regvals, colour=teams$regvals)) + geom_point(size=1.5)
+```
+
+Last Five Years Turnover and FTA on probability of winning season:
+
+![Season](https://raw.github.com/noahgift/boundary/master/images/winning-season-probability.png)
+
+
