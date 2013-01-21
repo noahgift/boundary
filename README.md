@@ -53,6 +53,10 @@ The new visualization for the abalone data probability boundary will look like t
 
 Example 2:  Five Years NBA Team Winning Season Probability
 -------------------------------------------------------------
+Data from:
+
+http://www.dougstats.com/
+
 ```{r }
 library(ggplot2)
 ggplot(teams, aes(teams$to, teams$fta, teams$regvals, colour=teams$regvals)) + geom_point(size=1.5)
