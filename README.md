@@ -67,6 +67,8 @@ Last Five Years Turnover and FTA on probability of winning season:
 ![Season](https://raw.github.com/noahgift/boundary/master/images/winning-season-probability.png)
 
 Now the same data with a boundary line:
-
+```{r }
+boundary(teams$regvals, teams[,c(15,10)], k=2)
+```
 ![Season](https://raw.github.com/noahgift/boundary/master/images/fta-to-winning-prob.png)
 
