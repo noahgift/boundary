@@ -65,7 +65,7 @@ library(ggplot2)
 ggplot(teams, aes(teams$to, teams$fta, teams$regvals, colour=teams$regvals)) + geom_point(size=1.5)
 ```
 
-Last Five Years Turnover and FTA on probability of winning season:
+1988-2012 Turnovers and Blocks on probability of winning season:
 
 ![Season](https://raw.github.com/noahgift/boundary/master/images/winning-season-probability.png)
 
