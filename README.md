@@ -51,7 +51,7 @@ The new visualization for the abalone data probability boundary will look like t
 
 ![Abalone](https://raw.github.com/noahgift/boundary/master/images/boundary.png)
 
-Example 2:  Five Years NBA Team Winning Season Probability
+Example 2:  1988-2012 NBA Team Winning Season Probability
 -------------------------------------------------------------
 Data from:
 
