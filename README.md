@@ -58,6 +58,9 @@ Data from:
 http://www.dougstats.com/
 
 ```{r }
+teams <- read.csv("data/bb-full.csv",header=T)
+kout <- knn(teams[,c(10,15)],teams[,22],50,regtype="cls")
+teams$regvals = kout$regvals
 library(ggplot2)
 ggplot(teams, aes(teams$to, teams$fta, teams$regvals, colour=teams$regvals)) + geom_point(size=1.5)
 ```
@@ -68,7 +71,7 @@ Last Five Years Turnover and FTA on probability of winning season:
 
 Now the same data with a boundary line:
 ```{r }
-boundary(teams$regvals, teams[,c(15,10)], k=50)
+boundary(teams$regvals, teams[,c(15,10)], k=3)
 ```
 ![Season](https://raw.github.com/noahgift/boundary/master/images/fta-to-winning-prob.png)
 
