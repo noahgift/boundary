@@ -4,6 +4,8 @@ boundary
 norm-noah boundary
 -----------------------
 
+A more up to date version can be found here:  http://heather.cs.ucdavis.edu/BigDataVis.html.  This is just a working copy.
+
 Example: 1
 -----------------
 
