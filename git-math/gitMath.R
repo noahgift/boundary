@@ -13,19 +13,29 @@
 
 #Get linecount from file
 linecount <- function(filename){
-	args <- sprintf("%s | awk '{print $1}'", filename)
-	lines <- system2("wc",args, stdout=TRUE, stderr=TRUE)
-	return(as.numeric(lines))
+	sargs <- sprintf(" %s | awk '{print $1}'", filename)
+	lines <- system2("wc",sargs, stdout=TRUE)
+	#Only give line counts if the file exists
+	if (length(lines) > 0){
+			lines <- as.numeric(lines)
+		}
+	else{
+		lines <- NA 
+	}
+	return(lines) 
+
 }
 
 #Generates churned file list for git repository via git log shell command
 #To query churn by time range pass in i.e. "1 month ago"
 gitchurn <- function(git_date_range) {
-	if(missing(git_date_range))
-		args <- "log --all -M -C --name-only --format='format:' | grep -v '^$'" 
-		else 
-		args <- sprintf("log --all -M -C --name-only --format='format:' --since='%s' | grep -v '^$'", git_date_range)
-	churnoutput <- system2("git", args, stdout=TRUE, stderr=TRUE)
+	if(missing(git_date_range)){
+		sargs <- "log --all -M -C --name-only --format='format:' | grep -v '^$'" 
+	}
+		else{
+		sargs <- sprintf("log --all -M -C --name-only --format='format:' --since='%s' | grep -v '^$'", git_date_range)
+	} 
+	churnoutput <- system2("git", sargs, stdout=TRUE, stderr=TRUE)
 	return(churnoutput)
 }
 
@@ -38,11 +48,23 @@ churnhelper <- function(churnfiles) {
 }
 
 #Returns code statistics matrix
-churn <- function() {
-	churnfiles <- gitchurn()
+churn <- function(git_date_range) {
+	if(missing(git_date_range)){
+		churnfiles <- gitchurn()
+	}
+		else{
+		churnfiles <- gitchurn(git_date_range)
+	}
 	gsmatrix <- churnhelper(churnfiles)
 	return(gsmatrix)
 }
+
+#Gets linescounts from matrix of source code files
+mklinecount <- function(churnmatrix) {
+	clcmatrix <- sapply(row.names(churnmatrix),linecount)
+	return(clcmatrix)
+}
+
 
 churnplot <- function() {
 	plot(churn(), ylab="file churn", xlab="file count")
