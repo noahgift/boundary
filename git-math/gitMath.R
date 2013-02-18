@@ -3,11 +3,9 @@
 
 #Usage example:
 #source('/Users/noah/src/boundary/git-math/gitMath.R')
-#churnfiles <- gitchurn()
-#gitstats <- churn(churnfiles)
-#plot(gitstats, ylab="file churn", xlab="file count")
+#gs <- churn()
 #OR
-#genplot()
+#churnplot()
 
 #TO DO
 #1.  Consider what to do with files that have never changed (1 value)
@@ -19,16 +17,20 @@ gitchurn <- function() {
 	return(churnoutput)
 }
 
-#Generates frequency matrix of churned files
-churn <- function(churnfiles) {
+#Helper function generates frequency matrix of churned files
+churnhelper <- function(churnfiles) {
 	gitstats <- as.matrix(table(churnfiles))
 	colnames(gitstats) <- c("churn")
 	return(gitstats)
 }
 
-genplot <- function() {
+#Returns code statistics matrix
+churn <- function() {
 	churnfiles <- gitchurn()
-	gstats <- churn(churnfiles)
-	plot(gstats, ylab="file churn", xlab="file count")
+	gsmatrix <- churnhelper(churnfiles)
+	return(gsmatrix)
 }
 
+churnplot <- function() {
+	plot(churn(), ylab="file churn", xlab="file count")
+}
