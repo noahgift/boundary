@@ -62,10 +62,32 @@ churn <- function(git_date_range) {
 #Gets linescounts from matrix of source code files
 mklinecount <- function(churnmatrix) {
 	clcmatrix <- sapply(row.names(churnmatrix),linecount)
+	#colnames(clcmatrix) <- c("linecount")
 	return(clcmatrix)
 }
 
+#Merges linecount and code churn matrix
+churnline <- function (cmatrix, lmatrix){
+	churnlinematrix <- merge(cmatrix, lmatrix, by = "row.names", all = TRUE)
+	return(churnlinematrix)
+}
+
+#Generates churn/line matrix and returns merged matrix
+mkchurnline <- function () {
+	cmatrix <- churn()
+	lmatrix <- mklinecount(cmatrix)
+	clcmatrix <- churnline(cmatrix, lmatrix)
+	clcmatrix <- na.omit(clcmatrix)
+	colnames(clcmatrix) <- c("files", "churn", "linecount")
+	return(clcmatrix)
+}
 
 churnplot <- function() {
 	plot(churn(), ylab="file churn", xlab="file count")
 }
+
+churnlineplot <- function () {
+	res <- mkchurnline()
+	plot(res$churn, res$linecount)
+}
+
