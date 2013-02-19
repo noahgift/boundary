@@ -77,3 +77,16 @@ boundary(teams$regvals, teams[,c(15,10)], k=3)
 ```
 ![Season](https://raw.github.com/noahgift/boundary/master/images/fta-to-winning-prob.png)
 
+Example 3:  Code Churn vs Churn/LOC
+-------------------------------------------------------------
+```{r}
+#Usage example:
+#source('boundary/git-math/gitMath.R')
+#gs <- mkchurnline()  #lines, churn, churn/lines
+#OR
+#mkreport()  			#generates report of top values, all and a plot of top values
+#gitMathAll.txt and gitMathtop.txt is created in current working directory
+#also creates pdf called topchurn.pdf
+```
+PDF Report Here:
+https://github.com/noahgift/boundary/blob/master/images/topchurn.pdf?raw=true
