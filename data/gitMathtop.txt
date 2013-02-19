@@ -1,0 +1,26 @@
+"files" "churn" "linecount" "relchurn"
+"420" "erts/emulator/beam/erl_process.c" 117 9072 0.0128968253968254
+"11753" "lib/ssl/src/ssl_connection.erl" 115 2541 0.0452577725304998
+"311" "erts/emulator/beam/beam_emu.c" 108 6247 0.0172882983832239
+"456" "erts/emulator/beam/global.h" 102 1144 0.0891608391608392
+"312" "erts/emulator/beam/beam_load.c" 96 6026 0.0159309658148025
+"11799" "lib/ssl/test/ssl_basic_SUITE.erl" 96 3183 0.0301602262016965
+"251" "erts/configure.in" 91 4602 0.019774011299435
+"278" "erts/doc/src/erlang.xml" 89 7018 0.0126816756910801
+"11111" "lib/snmp/doc/src/notes.xml" 89 1155 0.0770562770562771
+"2873" "lib/common_test/src/ct_run.erl" 84 3104 0.0270618556701031
+"480" "erts/emulator/drivers/common/inet_drv.c" 81 11167 0.00725351482045312
+"461" "erts/emulator/beam/io.c" 78 7583 0.0102861664248978
+"11319" "lib/snmp/src/app/snmp.appup.src" 77 41 1.8780487804878
+"12281" "lib/test_server/src/test_server.erl" 77 2609 0.0295132234572633
+"12271" "lib/test_server/src/test_server_ctrl.erl" 73 5407 0.013501017199926
+"2856" "lib/common_test/src/ct_framework.erl" 72 1355 0.0531365313653137
+"6804" "lib/hipe/cerl/erl_bif_types.erl" 72 2709 0.026578073089701
+"11757" "lib/ssl/src/ssl_handshake.erl" 69 1431 0.0482180293501048
+"352" "erts/emulator/beam/erl_bif_info.c" 65 4137 0.0157118685037467
+"11783" "lib/ssl/src/ssl.erl" 65 976 0.0665983606557377
+"317" "erts/emulator/beam/bif.c" 64 4927 0.0129896488735539
+"385" "erts/emulator/beam/erl_init.c" 64 1757 0.0364257256687536
+"11494" "lib/snmp/vsn.mk" 64 23 2.78260869565217
+"7379" "lib/inets/doc/src/notes.xml" 63 1527 0.0412573673870334
+"421" "erts/emulator/beam/erl_process.h" 60 1972 0.0304259634888438
