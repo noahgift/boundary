@@ -88,4 +88,5 @@ Example 3:  Code Churn vs Churn/LOC
 #gitMathAll.txt and gitMathtop.txt is created in current working directory
 #also creates pdf called topchurn.pdf
 ```
-![churn](https://github.com/noahgift/boundary/blob/master/images/topchurn.pdf?raw=true)
+PDF Report Here:
+https://github.com/noahgift/boundary/blob/master/images/topchurn.pdf?raw=true
