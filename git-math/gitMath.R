@@ -77,10 +77,10 @@ churnline <- function (cmatrix, lmatrix){
 }
 
 #Generates relative churn/loc metric and adds to matrix
-relchurn <- function (clc) {
-	clc <- cbind(clc,clc$churn/clc$linecount)
-	return(clc)
-}
+#relchurn <- function (clc) {
+#	clc <- cbind(clc,clc$churn/clc$linecount)
+#	return(clc)
+#}
 
 #Generates churn/line matrix and returns merged matrix
 #Omits NA values..i.e. files no longer in repo
