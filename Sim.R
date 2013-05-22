@@ -24,8 +24,10 @@ sim <-
    	cbind(x,y)
  }
 
+#This is the entry point to run a simulation
+#o <- runsim(10000,0.6,4, bandhw=0.4,k=10)
 runsim <-
-   function(n,d, cs) 
+   function(n,d, cs,bandhw=0.2,k=NULL) 
 {
       if (missing(n)) n <- 10000
       if (missing(d)) d <- 0.6
@@ -33,5 +35,5 @@ runsim <-
       resx <- sim(n,d)
       resy <- sim(n,d)
       css <- bstrapsnow(cs)
-      boundary(css,4, resx, resy)
+      boundary(css,4, resy[,"y"], resx, bandhw=bandhw,k=k)
 }
