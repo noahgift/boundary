@@ -30,9 +30,8 @@ source("Smoother.R")
 #    overall (unconditional) mean Y
 # bandhw:  determines width of band around boundary--all points 
 #    having estimated conditional Y mean within bval +/- bandhw*bval; 
-#    default is 0.2
-# k:  number of nearest neighbors; default is square root of the number
-#    of observations
+#    default is 0.1
+# k:  number of nearest neighbors; default is sqrt(n)
 # oldplot:  if not null, this is the saved previous plot, to which we
 #    will now add
 # xlb:  optional label for the horizontal axis
@@ -41,11 +40,12 @@ source("Smoother.R")
 # nchunks:  number of chunks; see Smoother.R
 
 boundary <- 
-   function(cls,nchunks,y,x,bval=NULL,bandhw=0.2,k=NULL,
+   function(cls,nchunks,y,x,bval=NULL,bandhw=0.1,k=NULL,
       oldplot=NULL,xlb=NULL,ylb=NULL,clr="#FF0000")
 {
    if (is.null(bval)) bval <- mean(y)
-   if (is.null(k)) k <- ceiling(sqrt(nrow(x)))
+   n <- nrow(x)
+   if (is.null(k)) k <- ceiling(sqrt(n))
    # find estimated mean Y at all data points for X1X2 
    eyhat <- smoothz(cls,nchunks,cbind(x,y),knnreg,k)
    tol <- bandhw * bval
@@ -59,23 +59,19 @@ boundary <-
    x2band <- x2[bandpts]
    x12 <- data.frame(x1b=x1band,x2b=x2band)
    newplot <- 
+      # if (is.null(oldplot)) {
+      #    ggplot(x12,aes(x1b,x2b)) + geom_smooth(stat="smooth",colour=clr)
+      # } else oldplot + geom_smooth(data=x12,stat="smooth",colour=clr)
       if (is.null(oldplot)) {
-         ggplot(x12,aes(x1b,x2b)) + geom_smooth(stat="smooth",colour=clr)
-      } else oldplot + geom_smooth(data=x12,stat="smooth",colour=clr)
+         ggplot(x12,aes(x1b,x2b)) + geom_smooth(method="loess",colour=clr)
+      } else oldplot + geom_smooth(data=x12,method="loess",colour=clr)
    if (!is.null(xlb)) newplot <- newplot + xlab(xlb)
    if (!is.null(ylb)) newplot <- newplot + ylab(ylb)
-   print(prcomp(x[bandpts,]))
-   print("some random points:")
+   cat("overall mean Y =",mean(y),"\n")
+   print('some random points (to identify "direction":')
    rx <- sample(1:nrow(x),5,replace=F)
    tmpx <- x[rx,]
    tmpy <- eyhat[rx]
    print(cbind(tmpx,tmpy))
    newplot
-}
-
-pc2 <- function(x) {
-   pc12 <- prcomp(x)$rotation[,1:2]
-   # x might be a data frame
-   as.matrix(x) %*% pc12
-
 }

@@ -9,54 +9,46 @@ bstrapsnow <-
       c2 <- shmcls(csize)
 }
 
-sim <- 
-	function(n=10000,prodcoeff=0.6) 
+sim <-
+function(n,prodcoeff) 
 {
-   	x <- matrix(runif(2*n),ncol=2)
-   	geny <- function(xrow) {
-      x1 <- xrow[1]
-      x2 <- xrow[2]
-      tmp <- runif(1) > (x1 + x2 + prodcoeff*x1*x2)/3
-      as.integer(tmp)
-   	}
-   	y <- apply(x,1,geny)
-   	cbind(x,y)
- }
-
-addplot <-
-   function(simout1, simout2, prevplot=NULL, bandhw=0.2, k=4)
-{
-   css <- bstrapsnow()
-   boundary(css,4,simout1[,"y"], simout2, bandhw=bandhw, k=k, oldplot=prevplot)
+   if (missing(n)) n <- 10000
+   if (missing(prodcoeff)) prodcoeff <- 0.6
+x <- matrix(runif(2*n),ncol=2)
+geny <- function(xrow) {
+   x1 <- xrow[1]
+   x2 <- xrow[2]
+   tmp <- runif(1) < (x1 + x2 + prodcoeff*x1*x2)/3
+   as.integer(tmp)
+}
+y <- apply(x,1,geny)
+cbind(x,y)
 }
 
-#fiveruns <-
-#   function
-#
+addplot <-
+   function(sim1, sim2, css, bandhw, k, oldplot)
+{
+   if (missing(css)) css <- bstrapsnow()
+   boundary(css,4,sim1[,"y"], sim2, bandhw=bandhw, k=k, oldplot=oldplot)
+}
 
 #This is the entry point to run a simulation
 #o <- runsim(10000,0.6,4, bandhw=0.4,k=10)
 runsim <-
-   function(n,d, cs,bandhw=0.2,k=4, oldplot=NULL) 
+   function(sim1, sim2, bandhw=0.4,k=4, oldplot=NULL) 
 {
-      if (missing(n)) n <- 10000
-      if (missing(d)) d <- 0.6
-      if (missing(cs)) cs <- 4
-      resx <- sim(n,d)
-      resy <- sim(n,d)
-      css <- bstrapsnow(cs)
-      boundary(css,4, resy[,"y"], resx, bandhw=bandhw,k=k, oldplot=oldplot)
+      if (missing(sim1)) sim1 <-sim(n,d)
+      if (missing(sim2)) sim2 <-sim(n,d)
+      addplot(sim1,sim2, bandhw=bandhw, k=k, oldplot=oldplot)
 }
 
-#p1 + annotate("text", x=.5, y=.51, label="Bandhw=0.2")
-
-
-#TO DO:
-#1.  Create several k permutations:  1, 5, 10, 20, 40, 80, 160, 320, 640
-#2.  Keep N at 10,000  
-#3.  Create several bandhw permutations: 0.2, 0.4, 0.6, 0.8, 1, 1.5, 2, 4, 6
-#
-#
-
-
-
+#Example Run
+sim1 <- sim()
+sim2 <- sim()
+p1 <- runsim(sim1, sim2, bandhw=0.5)
+p1a <- p1 + annotate("text", x=.1, y=0.482, label="bandhw=0.5")
+p2 <- runsim(sim1, sim2, bandhw=4, oldplot=p1a)
+p2a <- p2 + annotate("text", x=.1, y=0.488, label="bandhw=1.5")
+p3 <- runsim(sim1, sim2, bandhw=1, oldplot=p2a)
+p3a <- p3 + annotate("text", x=.1, y=0.502, label="bandhw=3")
+p3a + annotate("text", x=.5, y=0.47, label="N=10000, prodcoeff=0.6")
