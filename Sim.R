@@ -10,7 +10,7 @@ bstrapsnow <-
 }
 
 sim <-
-function(n,prodcoeff) 
+   function(n,prodcoeff) 
 {
    if (missing(n)) n <- 10000
    if (missing(prodcoeff)) prodcoeff <- 0.6
@@ -21,8 +21,8 @@ geny <- function(xrow) {
    tmp <- runif(1) < (x1 + x2 + prodcoeff*x1*x2)/3
    as.integer(tmp)
 }
-y <- apply(x,1,geny)
-cbind(x,y)
+   y <- apply(x,1,geny)
+   cbind(x,y)
 }
 
 addplot <-
@@ -42,13 +42,41 @@ runsim <-
       addplot(sim1,sim2, bandhw=bandhw, k=k, oldplot=oldplot)
 }
 
-#Example Run
-sim1 <- sim()
-sim2 <- sim()
-p1 <- runsim(sim1, sim2, bandhw=0.5)
-p1a <- p1 + annotate("text", x=.1, y=0.482, label="bandhw=0.5")
-p2 <- runsim(sim1, sim2, bandhw=4, oldplot=p1a)
-p2a <- p2 + annotate("text", x=.1, y=0.488, label="bandhw=1.5")
-p3 <- runsim(sim1, sim2, bandhw=1, oldplot=p2a)
-p3a <- p3 + annotate("text", x=.1, y=0.502, label="bandhw=3")
-p3a + annotate("text", x=.5, y=0.47, label="N=10000, prodcoeff=0.6")
+##K Values######
+#Example Run For N=10000
+#For deriving K graph
+# sim1 <- sim(100000)
+# sim2 <- sim(100000)
+# p1 <- runsim(sim1, sim2, bandhw=0.4)
+# p1a <- p1 + annotate("text", x=0, y=.51, label="k=4")
+# p2 <- runsim(sim1, sim2, k=40, oldplot=p1a)
+# p2a <- p2 + annotate("text", x=0, y=0.501, label="k=40")
+# p3 <- runsim(sim1, sim2, k=400, oldplot=p2a)
+# p3a <- p3 + annotate("text", x=0, y=0.491, label="k=400")
+# p3a + annotate("text", x=.5, y=0.47, label="N=10000, prodcoeff=0.6")
+
+##BANDHW#####
+#Example Run For N=10000
+#For deriving bandhw graph
+# sim1 <- sim()
+# sim2 <- sim()
+# p1 <- runsim(sim1, sim2, bandhw=0.5)
+# p1a <- p1 + annotate("text", x=.1, y=0.482, label="bandhw=0.5")
+# p2 <- runsim(sim1, sim2, bandhw=4, oldplot=p1a)
+# p2a <- p2 + annotate("text", x=.1, y=0.488, label="bandhw=1.5")
+# p3 <- runsim(sim1, sim2, bandhw=1, oldplot=p2a)
+# p3a <- p3 + annotate("text", x=.1, y=0.502, label="bandhw=3")
+# p3a + annotate("text", x=.5, y=0.47, label="N=10000, prodcoeff=0.6")
+
+#Example Run For N=100000
+#For deriving bandhw graph
+#I run out of memory on my machine doing this.
+# sim1 <- sim(n=100000)
+# sim2 <- sim(n=100000)
+# p1 <- runsim(sim1, sim2, bandhw=0.5)
+# p1a <- p1 + annotate("text", x=.1, y=0.482, label="bandhw=0.5")
+# p2 <- runsim(sim1, sim2, bandhw=4, oldplot=p1a)
+# p2a <- p2 + annotate("text", x=.1, y=0.488, label="bandhw=1.5")
+# p3 <- runsim(sim1, sim2, bandhw=1, oldplot=p2a)
+# p3a <- p3 + annotate("text", x=.1, y=0.502, label="bandhw=3")
+# p3a + annotate("text", x=.5, y=0.47, label="N=100000, prodcoeff=0.6")
